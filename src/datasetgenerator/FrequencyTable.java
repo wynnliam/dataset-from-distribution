@@ -23,6 +23,11 @@ class FrequencyTable implements Iterable<Integer> {
 			return -1;
 	}
 
+	public void incrementCount(int item) {
+		if(this.frequencies.containsKey(item))
+			this.frequencies.put(item, this.frequencies.get(item) + 1);
+	}
+
 	public Iterator<Integer> iterator() {
 		Set<Integer> set = this.frequencies.keySet();
 

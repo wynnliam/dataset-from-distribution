@@ -10,21 +10,37 @@
 
 package datasetgenerator;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 class DatasetGenerator {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		// The distribtuion of values we want our dataset to look like
 		FrequencyTable distribution = distribution();
 		// Keeps track of the frequency of values we counted. Use this
 		// to help us choose the next value from our distribution
-		FrequencyTable currentCount = new FrequencyTable();
+		FrequencyTable count = new FrequencyTable();
 		// The total number of items from our distribution.
 		int sum = sumOfItems(distribution);
+		// The value we will write to our dataset.
+		int curr;
 		// Use this to choose the highest freqency item that is
 		// not a previously chosen value
 		int prev = 0;
 
-		// Verify that the total number of items is 99740
-		System.out.println("Total: " + sum);
+		BufferedWriter out = null;
+
+		try {
+			FileWriter writer = new FileWriter("test.output");
+			out = new BufferedWriter(writer);
+			out.write("Hello");
+		} catch(IOException e) {
+			System.out.println("ERROR: " + e.toString());
+		} finally {
+			if(out != null)
+				out.close();
+		}	
 	}
 
 	private static FrequencyTable distribution() {
