@@ -1,15 +1,29 @@
+/*
+	Okay so the idea for writing all of the results is
+	as follows:
+
+	For each iteration:
+		We choose an item such that:
+			1. We did not choose it last iteraton
+			2. We do not exceed the count of that item
+*/
+
 package datasetgenerator;
 
 class DatasetGenerator {
 	public static void main(String[] args) {
+		// The distribtuion of values we want our dataset to look like
 		FrequencyTable distribution = distribution();
-		int sum = 0;
+		// Keeps track of the frequency of values we counted. Use this
+		// to help us choose the next value from our distribution
+		FrequencyTable currentCount = new FrequencyTable();
+		// The total number of items from our distribution.
+		int sum = sumOfItems(distribution);
+		// Use this to choose the highest freqency item that is
+		// not a previously chosen value
+		int prev = 0;
 
-		for(Integer item : distribution) {
-			sum += distribution.count(item);
-			System.out.println(item + "\t: " + distribution.count(item));
-		}
-
+		// Verify that the total number of items is 99740
 		System.out.println("Total: " + sum);
 	}
 
@@ -38,5 +52,15 @@ class DatasetGenerator {
 		result.insertItem(1, 83000);
 
 		return result;
+	}
+
+	private static int sumOfItems(FrequencyTable distribution) {
+		int sum = 0;
+
+		for(Integer item : distribution) {
+			sum += distribution.count(item);
+		}
+
+		return sum;
 	}
 }
