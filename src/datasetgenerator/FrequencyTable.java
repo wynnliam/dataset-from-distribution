@@ -5,6 +5,10 @@ import java.util.Hashtable;
 import java.util.Iterator;
 
 class FrequencyTable {
-	public FrequencyTable(int count) {
+	Map frequencies;
+
+	public FrequencyTable() {
+		// Keys are the item, the value is its count
+		this.frequencies = new Hashtable<Integer, Integer>();
 	}
 }
