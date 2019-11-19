@@ -29,3 +29,12 @@ are sampled according to the following table:
 |  3    | 83,000         |
 |  2    | 83,000         |
 |  1    | 83,000         |
+
+Rules for the dataset:
+1. All 997940 values must be in it (one line per value).
+2. No two consecutive values in the dataset should be the same.
+
+This program will also print out all lines that contain the value 20.
+
+## How to run this application
+TODO: Finish me!
