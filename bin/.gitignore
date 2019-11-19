@@ -1,0 +1,5 @@
+# The lines read "ignore everything in this folder except this file"
+# Why have it? We need the bin folder in our project so we can compile
+# but we don't want to be pushing .class files to github.
+*
+!.gitignore
