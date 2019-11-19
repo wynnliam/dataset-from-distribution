@@ -37,4 +37,27 @@ Rules for the dataset:
 This program will also print out all lines that contain the value 20.
 
 ## How to run this application
-TODO: Finish me!
+First make sure you have both the latest version of JDK and JRE installed.
+There is a Makefile in place so you can use that to compile and run the application.
+
+In your favorite shell, navigate to the root of the project.
+
+To build the application run this command:
+`make all`
+
+To run the application run this command:
+`make run`
+
+### What if I can't run makefiles?
+No worries! Those are mostly for my sake. As long as you are in the root of the project,
+you should be able to run the following commands.
+
+To build:
+`javac ./src/datasetgenerator/*.java -d ./bin/`
+
+To run, first navigate to the bin folder:
+`cd bin`
+
+Then run:
+`java datasetgenerator.DatasetGenerator`
+
