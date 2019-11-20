@@ -13,7 +13,7 @@ class FrequencyTable implements Iterable<Integer> {
 		this.frequencies = new Hashtable<Integer, Integer>();
 	}
 
-	public boolean hasEqualItemCounts(FrequencyTable compare) {
+	public boolean equals(FrequencyTable compare) {
 		if(this.frequencies.keySet().size() != compare.frequencies.keySet().size())
 			return false;
 
