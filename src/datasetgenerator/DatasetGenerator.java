@@ -1,22 +1,38 @@
 package datasetgenerator;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 class DatasetGenerator {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		FrequencyTable distribution = distribution();
 		int sum = 0;
 		int prev = 0;
 		int curr;
 
-		for(Integer item : distribution) {
+		for(Integer item : distribution)
 			sum += distribution.count(item);
-			System.out.println(item + "\t: " + distribution.count(item));
+
+		BufferedWriter outWriter = null;
+
+		try {
+			FileWriter fw = new FileWriter("test.output");
+			outWriter = new BufferedWriter(fw);
+
+			for(int i = 0; i < sum; i++) {
+				curr = distribution.getUniqueSampleWithoutReplacement(prev);
+				outWriter.write(curr + "\n");
+				prev = curr;
+			}
+			
+		} catch(IOException e) {
+			System.err.println(e.getMessage());
+		} finally {
+			if(outWriter != null)
+				outWriter.close();
 		}
 
-		for(int i = 0; i < sum; i++) {
-			curr = distribution.getUniqueSampleWithoutReplacement(prev);
-			System.out.println(curr);
-			prev = curr;
-		}
 	}
 
 	private static FrequencyTable distribution() {
