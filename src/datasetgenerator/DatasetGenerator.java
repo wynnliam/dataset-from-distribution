@@ -9,7 +9,11 @@ import java.io.IOException;
 class DatasetGenerator {
 	public static void main(String[] args) throws IOException {
 		FrequencyTable distribution = distribution();
+		// Sum is the count of items in distribution. Also tells us the number of lines
+		// test.output will have, as well as the number of sampling steps we do.
 		int sum = 0;
+		// Use this to keep the system from sampling a value we already grabbed
+		// in the last iteration.
 		int prev = 0;
 		int curr;
 
@@ -19,8 +23,7 @@ class DatasetGenerator {
 		BufferedWriter outWriter = null;
 
 		try {
-			FileWriter fw = new FileWriter("test.output");
-			outWriter = new BufferedWriter(fw);
+			outWriter = new BufferedWriter(new FileWriter("test.output"));
 
 			for(int i = 0; i < sum; i++) {
 				curr = distribution.getUniqueSampleWithoutReplacement(prev);
@@ -79,14 +82,16 @@ class DatasetGenerator {
 
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader("test.output"));
-			int prev, curr;
-
-			prev = -1;
+			// The value from the last line. Set it to -1 so that we make sure the
+			// value is not something we could have possibly read in.
+			int prev = -1;
+			int curr;
 
 			String strInput;
 			while((strInput = reader.readLine()) != null) {
 				curr = Integer.parseInt(strInput);
 
+				// Oops! Our sampling system had two consecutive values in the generated dataset.
 				if(curr == prev)
 					throw(new Exception("TWO CONSECUTIVE NUMBERS IN test.output."));
 
@@ -94,12 +99,15 @@ class DatasetGenerator {
 				prev = curr;
 			}
 
+			// Oops! Somehow the generated dataset's distribtuion doesn't match the one we should have.
 			if(!testDist.equals(mainDist))
 				throw(new Exception("DISTRIBUTION OF test.output IS INCORRECT"));
 
 			System.out.println("System passes verification tests!");
 
 		} catch(Exception e) {
+			// I figured it'd be more clean to use exception handling for the cases of failed
+			// tests. It reads more like a proper unit test which, if I had the time, I'd have added.
 			System.err.println("ERROR: " + e);
 		}
 	}
