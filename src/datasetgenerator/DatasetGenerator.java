@@ -23,6 +23,10 @@ class DatasetGenerator {
 			for(int i = 0; i < sum; i++) {
 				curr = distribution.getUniqueSampleWithoutReplacement(prev);
 				outWriter.write(curr + "\n");
+
+				if(curr == 20)
+					System.out.println((i + 1) + ": " + 20);
+
 				prev = curr;
 			}
 			
