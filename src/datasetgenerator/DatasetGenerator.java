@@ -93,7 +93,18 @@ class DatasetGenerator {
 					return;
 				}
 
+				testDist.incrementCount(curr);
+				prev = curr;
 			}
+
+			for(Integer item : testDist) {
+				if(testDist.count(item) != mainDist.count(item)) {
+					System.out.println("ERROR: RESULTING DIST IS INCORRECT");
+					return;
+				}
+			}
+
+			System.out.println("System passes verification tests!");
 
 		} catch(IOException e) {
 			System.err.println("Failed to open test.output");
