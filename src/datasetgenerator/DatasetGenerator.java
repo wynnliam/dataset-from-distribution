@@ -4,13 +4,19 @@ class DatasetGenerator {
 	public static void main(String[] args) {
 		FrequencyTable distribution = distribution();
 		int sum = 0;
+		int prev = 0;
+		int curr;
 
 		for(Integer item : distribution) {
 			sum += distribution.count(item);
 			System.out.println(item + "\t: " + distribution.count(item));
 		}
 
-		System.out.println("Total: " + sum);
+		for(int i = 0; i < sum; i++) {
+			curr = distribution.getUniqueSampleWithoutReplacement(prev);
+			System.out.println(curr);
+			prev = curr;
+		}
 	}
 
 	private static FrequencyTable distribution() {
