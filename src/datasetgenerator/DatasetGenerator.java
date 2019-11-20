@@ -79,7 +79,6 @@ class DatasetGenerator {
 
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader("test.output"));
-
 			int prev, curr;
 
 			prev = -1;
@@ -88,26 +87,22 @@ class DatasetGenerator {
 			while((strInput = reader.readLine()) != null) {
 				curr = Integer.parseInt(strInput);
 
-				if(curr == prev) {
-					System.out.println("ERROR: TWO CONSECUTIVE NUMBERS!");
-					return;
-				}
+				if(curr == prev)
+					throw(new Exception("TWO CONSECUTIVE NUMBERS IN test.output."));
 
 				testDist.incrementCount(curr);
 				prev = curr;
 			}
 
 			for(Integer item : testDist) {
-				if(testDist.count(item) != mainDist.count(item)) {
-					System.out.println("ERROR: RESULTING DIST IS INCORRECT");
-					return;
-				}
+				if(testDist.count(item) != mainDist.count(item))
+					throw(new Exception("DISTRIBUTION OF test.output IS INCORRECT"));
 			}
 
 			System.out.println("System passes verification tests!");
 
-		} catch(IOException e) {
-			System.err.println("Failed to open test.output");
+		} catch(Exception e) {
+			System.err.println("ERROR: " + e);
 		}
 	}
 
