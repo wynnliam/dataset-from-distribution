@@ -4,17 +4,13 @@ import java.util.Hashtable;
 import java.util.Set;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Random;
 
 class FrequencyTable implements Iterable<Integer> {
 	private Hashtable<Integer, Integer> frequencies;
-	private Random random;
 
 	public FrequencyTable() {
 		// Keys are the item, the value is its count
 		this.frequencies = new Hashtable<Integer, Integer>();
-
-		this.random = new Random();
 	}
 
 	public void insertItem(int item, int count) {
