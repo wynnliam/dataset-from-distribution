@@ -37,6 +37,7 @@ class DatasetGenerator {
 				outWriter.close();
 		}
 
+		verifyGeneratedDataset();
 	}
 
 	private static FrequencyTable distribution() {
@@ -62,6 +63,41 @@ class DatasetGenerator {
 		result.insertItem(3, 83000);
 		result.insertItem(2, 83000);
 		result.insertItem(1, 83000);
+
+		return result;
+	}
+
+	// A quick and dirty way of verifying the resulting dataset.
+	// We want to do two things: 1) ensure that in our file, no two
+	// consecutive lines are the same and 2) the test.output's frequency
+	// is the same as the specified distribution.
+	private static void verifyGeneratedDataset() {
+		FrequencyTable testDist = emptyTestTable();
+	}
+
+	private static FrequencyTable emptyTestTable() {
+		FrequencyTable result = new FrequencyTable();
+
+		result.insertItem(20, 0);
+		result.insertItem(19, 0);
+		result.insertItem(18, 0);
+		result.insertItem(17, 0);
+		result.insertItem(16, 0);
+		result.insertItem(15, 0);
+		result.insertItem(14, 0);
+		result.insertItem(13, 0);
+		result.insertItem(12, 0);
+		result.insertItem(11, 0);
+		result.insertItem(10, 0);
+		result.insertItem(9, 0);
+		result.insertItem(8, 0);
+		result.insertItem(7, 0);
+		result.insertItem(6, 0);
+		result.insertItem(5, 0);
+		result.insertItem(4, 0);
+		result.insertItem(3, 0);
+		result.insertItem(2, 0);
+		result.insertItem(1, 0);
 
 		return result;
 	}
