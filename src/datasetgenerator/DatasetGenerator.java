@@ -1,7 +1,9 @@
 package datasetgenerator;
 
 import java.io.BufferedWriter;
+import java.io.BufferedReader;
 import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
 
 class DatasetGenerator {
@@ -73,31 +75,36 @@ class DatasetGenerator {
 	// is the same as the specified distribution.
 	private static void verifyGeneratedDataset() {
 		FrequencyTable testDist = emptyTestTable();
+		FrequencyTable mainDist = distribution();
+
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader("test.output"));
+
+			int prev, curr;
+
+			prev = -1;
+
+			String strInput;
+			while((strInput = reader.readLine()) != null) {
+				curr = Integer.parseInt(strInput);
+
+				if(curr == prev) {
+					System.out.println("ERROR: TWO CONSECUTIVE NUMBERS!");
+					return;
+				}
+
+			}
+
+		} catch(IOException e) {
+			System.err.println("Failed to open test.output");
+		}
 	}
 
 	private static FrequencyTable emptyTestTable() {
 		FrequencyTable result = new FrequencyTable();
 
-		result.insertItem(20, 0);
-		result.insertItem(19, 0);
-		result.insertItem(18, 0);
-		result.insertItem(17, 0);
-		result.insertItem(16, 0);
-		result.insertItem(15, 0);
-		result.insertItem(14, 0);
-		result.insertItem(13, 0);
-		result.insertItem(12, 0);
-		result.insertItem(11, 0);
-		result.insertItem(10, 0);
-		result.insertItem(9, 0);
-		result.insertItem(8, 0);
-		result.insertItem(7, 0);
-		result.insertItem(6, 0);
-		result.insertItem(5, 0);
-		result.insertItem(4, 0);
-		result.insertItem(3, 0);
-		result.insertItem(2, 0);
-		result.insertItem(1, 0);
+		for(int i = 1; i <= 20; i++)
+			result.insertItem(i, 0);
 
 		return result;
 	}
