@@ -94,10 +94,8 @@ class DatasetGenerator {
 				prev = curr;
 			}
 
-			for(Integer item : testDist) {
-				if(testDist.count(item) != mainDist.count(item))
-					throw(new Exception("DISTRIBUTION OF test.output IS INCORRECT"));
-			}
+			if(!testDist.hasEqualItemCounts(mainDist))
+				throw(new Exception("DISTRIBUTION OF test.output IS INCORRECT"));
 
 			System.out.println("System passes verification tests!");
 
