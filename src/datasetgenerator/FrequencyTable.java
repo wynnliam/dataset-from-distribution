@@ -30,7 +30,6 @@ class FrequencyTable implements Iterable<Integer> {
 
 	public int getUniqueSampleWithoutReplacement(int prev) {
 		ArrayList<Integer> sampleFrom = new ArrayList<Integer>();
-		int randIndex;
 		int result;
 
 		for(Integer item : this) {
@@ -38,14 +37,27 @@ class FrequencyTable implements Iterable<Integer> {
 				sampleFrom.add(item);
 		}
 
-		do {
-			randIndex = this.random.nextInt(sampleFrom.size());
-			result = sampleFrom.get(randIndex);
-		} while(result == prev);
-
+		result = chooseNonRepeatByFrequency(prev, sampleFrom);
 		decrementCount(result);
 
 		return result;
+	}
+
+	private int chooseNonRepeatByFrequency(int prev, ArrayList<Integer> candidates) {
+		if(candidates.size() < 1)
+			return -1;
+
+		int best = candidates.get(0);
+		int freq = this.count(best);
+
+		for(int i = 0; i < candidates.size(); i++) {
+			if(candidates.get(i) != prev && this.count(candidates.get(i)) > freq) {
+				best = candidates.get(i);
+				freq = this.count(best);
+			}
+		}
+
+		return best;
 	}
 
 	private void decrementCount(int item) {
